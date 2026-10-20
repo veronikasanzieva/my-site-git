@@ -1,0 +1,435 @@
+/* ============ 0. ПЕРЕМЕННЫЕ И СБРОС ============ */
+:root {
+ --color-main: #2b6cb0;
+ --color-main-dark: #2c5282;
+ --color-accent: #ffd700;
+ --color-dark: #1a202c;
+ --color-text: #2d3748;
+ --color-bg: #f7fafc;
+ --color-card: #ffffff;
+ --color-border: #cbd5e0;
+ --radius: 12px;
+ --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Тёмная тема: переключается кнопкой через <html class="dark"> */
+html.dark {
+ --color-text: #e2e8f0;
+ --color-bg: #1a202c;
+ --color-card: #2d3748;
+ --color-border: #4a5568;
+ --color-dark: #0f1117;
+ --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; } /* плавная прокрутка к якорям */
+
+body {
+ margin: 0;
+ font-family: 'Segoe UI', Arial, sans-serif;
+ font-size: 16px;
+ line-height: 1.6;
+ color: var(--color-text);
+ background: var(--color-bg);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ============ 1. Шапка и навигация ============ */
+header {
+ position: relative; /* для позиционирования кнопки темы */
+ background: linear-gradient(135deg, #667eea, #764ba2);
+ color: #fff;
+ text-align: center;
+ padding: 60px 20px;
+}
+
+header h1 {
+ font-size: clamp(2rem, 5vw, 3.5rem);
+ margin: 16px 0 8px;
+}
+
+header p { margin: 0; opacity: 0.9; }
+
+nav {
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 24px;
+}
+
+nav a {
+ color: rgba(255, 255, 255, 0.9);
+ text-decoration: none;
+ font-weight: 600;
+ transition: color 0.2s;
+}
+
+nav a:hover { color: var(--color-accent); }
+
+/* ============ 2. ОСНОВНОЙ КОНТЕНТ ============ */
+main {
+ max-width: 900px;
+ margin: 0 auto;
+ padding: 20px;
+}
+
+section { margin: 56px 0; }
+
+section h2 {
+ color: var(--color-text);
+ border-bottom: 3px solid var(--color-main);
+ padding-bottom: 8px;
+ display: inline-block;
+ margin-top: 0;
+}
+
+/* «Обо мне»: фото слева, текст справа */
+#about {
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ gap: 24px;
+}
+
+#about img {
+ border-radius: 50%;
+ width: 160px;
+ height: 160px;
+ object-fit: cover;
+ box-shadow: var(--shadow);
+}
+
+#about h2 { display: block; border: none; padding: 0; }
+
+/* ============ 3. НАВЫКИ ============ */
+#skills ul { padding-left: 20px; }
+#skills li { padding: 6px 0; }
+
+/* ============ 4. КАРТОЧКИ ПРОЕКТОВ ============ */
+#projects {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+ gap: 20px;
+}
+
+#projects h2 { grid-column: 1 / -1; } /* заголовок на всю ширину */
+
+article {
+ display: flex;
+ flex-direction: column;
+ background: var(--color-card);
+ border-radius: var(--radius);
+ box-shadow: var(--shadow);
+ padding: 24px;
+ transition: transform 0.2s, box-shadow 0.2s;
+}
+
+article:hover {
+ transform: translateY(-4px);
+ box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+article h3 { margin-top: 0; }
+
+article a {
+ margin-top: auto; /* прижать ссылку к низу карточки */
+ color: var(--color-main);
+ font-weight: 600;
+ text-decoration: none;
+}
+
+article a:hover { text-decoration: underline; }
+
+/* ============ 5. Форма и сообщение ============ */
+form {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ background: var(--color-card);
+ padding: 24px;
+ border-radius: var(--radius);
+ box-shadow: var(--shadow);
+ max-width: 480px;
+}
+
+label { font-weight: 600; }
+
+input, textarea {
+ padding: 10px 14px;
+ border: 1px solid var(--color-border);
+ border-radius: 8px;
+ font: inherit;
+ background: var(--color-bg);
+ color: var(--color-text);
+}
+
+input:focus, textarea:focus {
+ outline: none;
+ border-color: var(--color-main);
+ box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.25);
+}
+
+input:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown) {
+ border-color: #e53e3e;
+}
+
+button {
+ background: var(--color-main);
+ color: #fff;
+ border: none;
+ padding: 12px 24px;
+ border-radius: 8px;
+ font-size: 1rem;
+ font-weight: 600;
+ cursor: pointer;
+ transition: background 0.2s;
+}
+
+button:hover { background: var(--color-main-dark); }
+
+/* Сообщение об успешной отправке (отображается с помощью класса .visible из JS) */
+#form-status {
+ max-width: 480px;
+ margin-top: 12px;
+ border-radius: 8px;
+ color: #2f855a;
+ font-weight: 600;
+ opacity: 0;
+ transition: opacity 0.3s;
+}
+
+#form-status.visible {
+ opacity: 1;
+ padding: 12px;
+ background: #f0fff4;
+}
+
+/* ============ 6. ПОДВАЛ ============ */
+footer {
+ background: var(--color-dark);
+ color: #a0aec0;
+ text-align: center;
+ padding: 24px;
+ margin-top: 60px;
+}
+
+/* ============ 7. КНОПКА «ВЕРХ» ============ */
+#to-top {
+ position: fixed;
+ bottom: 24px;
+ right: 24px;
+ width: 48px;
+ height: 48px;
+ border-radius: 50%;
+ border: none;
+ background: var(--color-main);
+ color: #fff;
+ font-size: 22px;
+ cursor: pointer;
+ box-shadow: var(--shadow);
+ opacity: 0;
+ visibility: hidden; /* скрыта, пока не прокрутили */
+ transition: opacity 0.3s, visibility 0.3s;
+}
+
+#to-top.visible {
+ opacity: 1;
+ visibility: visible;
+}
+
+/* ============ 8. АДАПТИВНОСТЬ ============ */
+@media (max-width: 600px) {
+ header { padding: 48px 16px 40px; }
+ nav { gap: 14px; font-size: 0.9rem; }
+ #about { flex-direction: column; text-align: center; }
+ section { margin: 40px 0; }
+}
+
+/* ============================================================
+   9. ПАНЕЛЬ ДОСТУПНОСТИ
+   ============================================================ */
+.a11y-panel {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    max-width: 280px;
+    z-index: 10;
+}
+
+.a11y-panel button {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.a11y-panel button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.05);
+}
+
+.a11y-panel button:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Активная кнопка-переключатель (контраст, озвучка) */
+.a11y-panel button[aria-pressed="true"] {
+    background: rgba(255, 215, 0, 0.9);
+    color: #000;
+}
+
+/* ============================================================
+   10. SKIP-LINK (для клавиатурных пользователей)
+   ============================================================ */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 8px;
+    z-index: 1000;
+    background: #000;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 8px;
+}
+
+/* ============================================================
+   11. РАЗМЕР ШРИФТА (для слабовидящих)
+   ============================================================ */
+html.font-large  { font-size: 20px; }
+html.font-xlarge { font-size: 24px; }
+
+/* ============================================================
+   12. ВЫСОКИЙ КОНТРАСТ (для неразличающих цвет)
+   ============================================================ */
+html.contrast {
+    --color-text: #000;
+    --color-bg: #fff;
+    --color-card: #fff;
+    --color-border: #000;
+    --color-main: #000;
+    --color-main-dark: #000;
+    --color-dark: #000;
+    --color-accent: #ff0;
+    --shadow: none;
+}
+
+html.contrast body {
+    background: #fff;
+    color: #000;
+}
+
+html.contrast header {
+    background: #000;
+    color: #fff;
+}
+
+html.contrast nav a { color: #fff; }
+html.contrast nav a:hover { color: #ff0; }
+
+html.contrast section h2 {
+    border-bottom-color: #000;
+}
+
+html.contrast article {
+    border: 2px solid #000;
+}
+
+html.contrast article a { color: #000; text-decoration: underline; }
+
+html.contrast input,
+html.contrast textarea {
+    background: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+html.contrast button {
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+}
+
+html.contrast button:hover { background: #333; }
+
+html.contrast footer {
+    background: #000;
+    color: #fff;
+    border-top: 2px solid #fff;
+}
+
+html.contrast #form-status.visible {
+    background: #000;
+    color: #ff0;
+    border: 2px solid #000;
+}
+
+html.contrast .a11y-panel button {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+html.contrast .a11y-panel button[aria-pressed="true"] {
+    background: #ff0;
+    color: #000;
+}
+
+/* Если включён и контраст, и тёмная тема — приоритет у контраста */
+html.contrast.dark {
+    --color-text: #fff;
+    --color-bg: #000;
+    --color-card: #000;
+    --color-border: #fff;
+}
+
+html.contrast.dark header { background: #000; }
+html.contrast.dark article { border-color: #fff; }
+html.contrast.dark article a { color: #fff; }
+html.contrast.dark input,
+html.contrast.dark textarea { background: #000; color: #fff; border-color: #fff; }
+html.contrast.dark button { background: #fff; color: #000; border-color: #fff; }
+html.contrast.dark section h2 { border-bottom-color: #fff; }
+
+/* ============================================================
+   13. Уважаем системную настройку «меньше анимаций»
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+}
+
+/* ============================================================
+   14. АДАПТИВ ПАНЕЛИ ДОСТУПНОСТИ
+   ============================================================ */
+@media (max-width: 600px) {
+    .a11y-panel {
+        position: static;
+        max-width: none;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+}

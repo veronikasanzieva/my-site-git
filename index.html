@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио начинающего веб-разработчика">
+    <title>Вероника Санжиева — веб-разработчик</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- SKIP-LINK для клавиатурных пользователей и скринридеров -->
+    <a href="#main-content" class="skip-link">Перейти к содержанию</a>
+
+    <!-- ШАПКА -->
+    <header>
+        <!-- ПАНЕЛЬ ДОСТУПНОСТИ -->
+        <div class="a11y-panel" role="group" aria-label="Настройки доступности">
+            <button id="theme-toggle" title="Сменить тему" aria-label="Сменить тему">🌙</button>
+
+            <button id="font-decrease" title="Уменьшить шрифт" aria-label="Уменьшить шрифт">A−</button>
+            <button id="font-reset"    title="Обычный шрифт"   aria-label="Обычный размер шрифта">A</button>
+            <button id="font-increase" title="Увеличить шрифт" aria-label="Увеличить шрифт">A+</button>
+
+            <button id="contrast-toggle" title="Высокий контраст" aria-label="Высокий контраст" aria-pressed="false">◐</button>
+            <button id="speak-toggle"    title="Озвучить страницу" aria-label="Озвучить страницу" aria-pressed="false">🔊</button>
+        </div>
+
+        <nav aria-label="Основная навигация">
+            <a href="#about">Обо мне</a>
+            <a href="#skills">Навыки</a>
+            <a href="#projects">Проекты</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        <h1>Санжиева Вероника Зоригтоевна</h1>
+        <p>Начинающий веб-разработчик</p>
+    </header>
+
+    <main id="main-content">
+        <!-- ОБО МНЕ -->
+        <section id="about">
+            <img src="photo.jpg" alt="Фотография Вероники Санжиевой">
+            <div>
+                <h2>Обо мне</h2>
+                <p>Привет! Я изучаю <strong>веб-разработку</strong> и создаю сайты
+                   на <em>HTML, CSS и JavaScript</em>. Это мой проект, собранный с нуля.</p>
+            </div>
+        </section>
+
+        <!-- НАВЫКИ -->
+        <section id="skills">
+            <h2>Навыки</h2>
+            <h3>Общие</h3>
+                    <ul>
+                    <li>Трудолюбие</li>
+                    <li>Обучаемость</li>
+                    </ul>
+                <h3>Профессиональные</h3>
+                    <ul>
+                    <li>C++</li>
+                    <li>Python</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    </ul>
+        </section>
+
+        <!-- ПРОЕКТЫ -->
+        <section id="projects">
+            <h2>Мои проекты</h2>
+            <article>
+                <h3>🐶 Сайт ветклиники</h3>
+                <p>Лендинг с информацией, услугами и новостями.</p>
+                <a href="https://www.figma.com/proto/2DKexZ9aSh8M0dO6eWuDo5/Санжиева-Вероника-09А48?node-id=1-2&starting-point-node-id=1%3A2">Смотреть проект →</a>
+            </article>
+            <article>
+                <h3>✈️ Блог о путешествиях</h3>
+                <p>Многостраничный сайт с картой поездок и галереей фотографий.</p>
+                <a href="#">Смотреть проект →</a>
+            </article>
+            <article>
+                <h3>📚 Список книг</h3>
+                <p>Интерактивный список прочитанного с поиском и фильтрами.</p>
+                <a href="#">Смотреть проект →</a>
+            </article>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+        <section id="contacts">
+            <h2>Связаться со мной</h2>
+            <form action="#" method="POST">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" placeholder="Как вас зовут?" required>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="you@mail.ru" required>
+
+                <label for="msg">Сообщение</label>
+                <textarea id="msg" name="message" rows="4" placeholder="Ваше сообщение..." required></textarea>
+
+                <button type="submit">Отправить</button>
+            </form>
+            <p id="form-status" role="status"></p>
+        </section>
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        <p>© <span id="year">2026</span> Санжиева Вероника. Проект на HTML + CSS + JS.</p>
+    </footer>
+
+    <!-- КНОПКА «НАВЕРХ» -->
+    <button id="to-top" title="Наверх" aria-label="Наверх">↑</button>
+
+    <!-- JAVASCRIPT (defer = выполнится после загрузки HTML) -->
+    <script src="js/script.js" defer></script>
+</body>
+</html>
