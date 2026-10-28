@@ -87,7 +87,13 @@
         <!-- КОНТАКТЫ -->
         <section id="contacts">
             <h2>Связаться со мной</h2>
-            <form action="#" method="POST">
+            
+            <!-- ОБНОВЛЕННАЯ ФОРМА (action указывает на FormSubmit) -->
+            <form action="https://formsubmit.co/veronikasanzieva@gmail.com" method="POST">
+                <!-- Скрытые настройки FormSubmit -->
+                <input type="hidden" name="_subject" value="Новое сообщение с портфолио!">
+                <input type="hidden" name="_captcha" value="false">
+                
                 <label for="name">Имя</label>
                 <input type="text" id="name" name="name" placeholder="Как вас зовут?" required>
 
