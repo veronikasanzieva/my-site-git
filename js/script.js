@@ -22,31 +22,65 @@ if (themeBtn) {
 
 
 // ====================================================
-// 3. ОТПРАВКА ФОРМЫ БЕЗ ПЕРЕЗАГРУЗКИ СТРАНИЦЫ
+// 3. ОТПРАВКА ФОРМЫ БЕЗ ПЕРЕЗАГРУЗКИ СТРАНИЦЫ (на почту)
 // ====================================================
 const form = document.querySelector('form');
 const statusMsg = document.querySelector('#form-status');
 
 if (form && statusMsg) {
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();        // отменяем перезагрузку
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // отменяем перезагрузку страницы
 
         const nameInput = document.querySelector('#name');
         const name = nameInput ? nameInput.value.trim() : '';
 
+        // Простая проверка на пустое имя (на всякий случай)
         if (!name) {
             statusMsg.textContent = 'Пожалуйста, укажите имя.';
+            statusMsg.style.color = '#e53e3e'; // Красный цвет для ошибки
             statusMsg.classList.add('visible');
             return;
         }
 
-        statusMsg.textContent = `Спасибо, ${name}! Сообщение отправлено.`;
-        statusMsg.classList.add('visible');
+        // Находим кнопку и блокируем её на время отправки
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Отправка...';
+        submitBtn.disabled = true;
 
-        form.reset();                  // очищаем поля
+        // Собираем данные из формы
+        const formData = new FormData(form);
 
-        // Скрываем сообщение через 5 секунд
-        setTimeout(() => statusMsg.classList.remove('visible'), 5000);
+        try {
+            // Отправляем данные на FormSubmit (адрес берется из action формы)
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' // Говорим, что ждем JSON-ответ, а не редирект
+                }
+            });
+
+            if (response.ok) {
+                statusMsg.textContent = `Спасибо, ${name}! Сообщение отправлено.`;
+                statusMsg.style.color = '#2f855a'; // Зеленый цвет для успеха
+                statusMsg.classList.add('visible');
+                form.reset(); // Очищаем поля формы
+
+                // Скрываем сообщение через 5 секунд
+                setTimeout(() => statusMsg.classList.remove('visible'), 5000);
+            } else {
+                throw new Error('Ошибка при отправке');
+            }
+        } catch (error) {
+            statusMsg.textContent = 'Произошла ошибка при отправке. Попробуйте позже.';
+            statusMsg.style.color = '#e53e3e'; // Красный цвет для ошибки
+            statusMsg.classList.add('visible');
+        } finally {
+            // Возвращаем кнопку в исходное состояние в любом случае
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
     });
 }
 
